@@ -1,0 +1,8 @@
+numpy>=1.24.0
+Pillow>=10.0.0
+pywin32>=306
+sounddevice>=0.4.6
+openai-whisper>=20231117
+pyinstaller>=6.0.0
+torch>=2.0.0
+torchaudio>=2.0.0 
