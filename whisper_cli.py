@@ -117,7 +117,6 @@ class WhisperGUI:
         
         # Set window size and position
         self.root.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
-        self.root.configure(bg='#2b2b2b')
 
         # Add keyboard bindings
         self.root.bind('<space>', lambda e: self.toggle_recording())
@@ -213,26 +212,6 @@ class WhisperGUI:
         )
         self.status_label.pack(side=tk.LEFT, padx=10)
 
-        # Visualizer frame (to the right of the button and status)
-        self.visualizer_frame = ttk.Frame(top_frame)
-        self.visualizer_frame.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
-        
-        # Create visualizer bars
-        self.bars = []
-        for i in range(40):  # Increased number of bars for wider window
-            bar = tk.Canvas(
-                self.visualizer_frame,
-                width=10,
-                height=20,
-                bg='#2b2b2b',
-                highlightthickness=0
-            )
-            bar.pack(side=tk.LEFT, padx=1)
-            self.bars.append(bar)
-        
-        # Hide visualizer initially
-        self.visualizer_frame.pack_forget()
-
         # Text box for transcription with custom styling
         self.text_box = tk.Text(
             main_frame,
@@ -254,34 +233,6 @@ class WhisperGUI:
         self.text_box.tag_configure("default", foreground="white")
         self.text_box.tag_add("default", "1.0", tk.END)
 
-    def update_visualizer(self):
-        """Update the visualizer bars based on audio level"""
-        if not self.recorder.is_recording:
-            return
-
-        # Get current audio level and scale it
-        level = min(1.0, self.recorder.audio_level * 5)  # Scale up the level for better visibility
-        
-        # Update each bar
-        for i, bar in enumerate(self.bars):
-            # Calculate bar height based on level and position
-            bar_height = int(20 * level * (1 - abs(i - 20) / 20))
-            bar_height = max(2, bar_height)  # Minimum height of 2 pixels
-            
-            # Clear previous bar
-            bar.delete("all")
-            
-            # Draw new bar
-            bar.create_rectangle(
-                0, 20 - bar_height,
-                10, 20,
-                fill='#ff4444' if level > 0.5 else '#ff8888',
-                outline=''
-            )
-
-        # Schedule next update
-        self.root.after(50, self.update_visualizer)
-
     def toggle_recording(self):
         if not self.recorder.is_recording:
             self.start_recording()
@@ -291,8 +242,6 @@ class WhisperGUI:
     def start_recording(self):
         self.record_button.configure(image=self.icons['mic'])
         self.status_label.configure(text="Recording...")
-        self.visualizer_frame.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
-        self.update_visualizer()
         threading.Thread(target=self._record, daemon=True).start()
 
     def _record(self):
@@ -306,7 +255,6 @@ class WhisperGUI:
     def stop_recording(self):
         self.record_button.configure(image=self.icons['record'])
         self.status_label.configure(text="Generating text...")
-        self.visualizer_frame.pack_forget()
         threading.Thread(target=self._stop_and_transcribe, daemon=True).start()
 
     def _stop_and_transcribe(self):
