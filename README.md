@@ -1,4 +1,4 @@
-1# Whisper CLI
+# Whisper GUI
 
 A lightweight alternative to Windows H (Windows Speech Recognition) that provides more flexibility and language support using OpenAI's Whisper model.
 
@@ -25,7 +25,7 @@ Here's a screenshot of the application interface:
 ### Option 1: Download Pre-built Executable
 
 1. Go to the [Releases](https://github.com/elpargo/whisper-windows-gui/releases) page
-2. Download the latest version of `whisper-cli.exe`
+2. Download the latest version of `whisper-gui.exe`
 3. Run the executable
 
 ### Option 2: Build from Source
@@ -63,7 +63,7 @@ Here's a screenshot of the application interface:
 
 Note: You can use either the Space or Enter key interchangeably to start/stop recording.
 
-## Why Whisper CLI?
+## Why Whisper GUI?
 
 While Windows H provides basic speech recognition, it has limitations:
 - Limited language support
@@ -71,7 +71,7 @@ While Windows H provides basic speech recognition, it has limitations:
 - Less accurate for non-English languages
 - No easy way to save transcriptions
 
-Whisper CLI addresses these issues by:
+Whisper GUI addresses these issues by:
 - Supporting multiple languages
 - Working offline
 - Providing higher accuracy

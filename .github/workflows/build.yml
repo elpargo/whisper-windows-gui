@@ -24,7 +24,7 @@ jobs:
         
     - name: Build executable
       run: |
-        pyinstaller --clean --noconfirm --onefile --windowed --icon=icons/mic.ico --name whisper-cli whisper_gui.py
+        pyinstaller --clean --noconfirm --onefile --windowed --icon=icons/mic.ico --name whisper-gui whisper_gui.py
         
     - name: Upload artifact
       uses: actions/upload-release-asset@v1
@@ -32,6 +32,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./dist/whisper-cli.exe
-        asset_name: whisper-cli.exe
+        asset_path: ./dist/whisper-gui.exe
+        asset_name: whisper-gui.exe
         asset_content_type: application/octet-stream 
