@@ -22,13 +22,20 @@ jobs:
         pip install -r requirements.txt
         pip install pyinstaller
         
+    - name: List current directory
+      run: |
+        dir
+        dir icons
+        
     - name: Build executable
       run: |
         pyinstaller --clean --noconfirm --onefile --windowed --icon=icons/mic.ico --name whisper-gui whisper_gui.py
+        if ($LASTEXITCODE -ne 0) { exit 1 }
         
     - name: List dist directory
       run: |
         dir dist
+        if (-not (Test-Path dist/whisper-gui.exe)) { exit 1 }
         
     - name: Upload artifact
       uses: softprops/action-gh-release@v1
