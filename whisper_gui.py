@@ -134,9 +134,9 @@ class WhisperRecorder:
         if status:
             logger.warning(f"Audio stream status: {status}")
         try:
-        self.BUFFER.append(indata.copy())
-        # Calculate audio level (RMS)
-        self.audio_level = np.sqrt(np.mean(indata**2))
+            self.BUFFER.append(indata.copy())
+            # Calculate audio level (RMS)
+            self.audio_level = np.sqrt(np.mean(indata**2))
         except Exception as e:
             logger.error(f"Error in audio callback: {e}")
 
@@ -168,21 +168,21 @@ class WhisperRecorder:
             return None
 
         try:
-        self.stream.stop()
-        self.stream.close()
-        self.is_recording = False
-        
-        duration = time.time() - self.start_time
-        logger.info(f"✅ Recording stopped. Duration: {duration:.1f} seconds")
-        
-        if not self.BUFFER:
-            logger.warning("No audio data was recorded")
-            return None
+            self.stream.stop()
+            self.stream.close()
+            self.is_recording = False
+            
+            duration = time.time() - self.start_time
+            logger.info(f"✅ Recording stopped. Duration: {duration:.1f} seconds")
+            
+            if not self.BUFFER:
+                logger.warning("No audio data was recorded")
+                return None
 
-        # Concatenate all chunks
-        audio_data = np.concatenate(self.BUFFER, axis=0).flatten()
-        self.BUFFER = []  # Clear buffer for next recording
-        return audio_data
+            # Concatenate all chunks
+            audio_data = np.concatenate(self.BUFFER, axis=0).flatten()
+            self.BUFFER = []  # Clear buffer for next recording
+            return audio_data
         except Exception as e:
             logger.error(f"Error stopping recording: {e}")
             return None
