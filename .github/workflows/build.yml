@@ -1,6 +1,10 @@
 name: Build Executable
 
 on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
   release:
     types: [created]
 
@@ -38,6 +42,7 @@ jobs:
         if (-not (Test-Path dist/whisper-gui.exe)) { exit 1 }
         
     - name: Upload artifact
+      if: github.event_name == 'release'
       uses: softprops/action-gh-release@v1
       with:
         files: dist/whisper-gui.exe
