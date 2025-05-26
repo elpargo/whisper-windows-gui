@@ -16,14 +16,15 @@ This tool is designed to replace the built-in Windows H speech recognition featu
 
 ## Demo
 
-Check out the screenshot in the `docs` directory to see the application interface:
-- [Application Screenshot](docs/screenshot_of_the_app.png)
+Here's a screenshot of the application interface:
+
+![Application Screenshot](docs/screenshot_of_the_app.png)
 
 ## Installation
 
 ### Option 1: Download Pre-built Executable
 
-1. Go to the [Releases](https://github.com/yourusername/whisper-cli/releases) page
+1. Go to the [Releases](https://github.com/elpargo/whisper-windows-gui/releases) page
 2. Download the latest version of `whisper-cli.exe`
 3. Run the executable
 
@@ -31,8 +32,8 @@ Check out the screenshot in the `docs` directory to see the application interfac
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/whisper-cli.git
-   cd whisper-cli
+   git clone https://github.com/elpargo/whisper-windows-gui/releases
+   cd whisper-gui
    ```
 
 2. Create and activate a virtual environment:
