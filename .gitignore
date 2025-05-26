@@ -42,12 +42,6 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Project specific
-icons/
-*.wav
-*.mp3
-*.mp4
-
 # Python
 venv/
 ENV/ 
