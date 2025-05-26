@@ -1,10 +1,6 @@
 name: Build Executable
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
   release:
     types: [created]
 
@@ -41,9 +37,15 @@ jobs:
         dir dist
         if (-not (Test-Path dist/whisper-gui.exe)) { exit 1 }
         
-    - name: Upload artifact
-      if: github.event_name == 'release'
+    - name: Upload executable to release
       uses: softprops/action-gh-release@v1
       with:
         files: dist/whisper-gui.exe
-        token: ${{ secrets.GITHUB_TOKEN }} 
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Upload executable as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: whisper-gui
+        path: dist/whisper-gui.exe
+        retention-days: 30 
